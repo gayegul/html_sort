@@ -1,0 +1,123 @@
+<html>
+<head>
+<script src="jquery-1.11.0.js"></script>
+<script>
+
+var getRank = function(liElement) {
+	return parseFloat(liElement.find(".rating").html());
+}
+
+var sort = function(liElement){
+	var current = $(liElement);
+	var next = current.next();
+	while (next.length){
+		if(getRank(next) > getRank(current)){
+			current.before(next);
+			current = next;
+		}
+		next = next.next();
+	}
+	if (current.next().length){
+		sort(current.next());
+	}
+}
+
+$(function(){
+	$("#bttn").click(function(){
+		sort($($('#tvshows li')[0]));
+	});
+});
+
+
+</script>
+
+<style>
+#title{
+	border: groove;
+	border-radius: 70px;
+	font-weight: bold;
+	padding: 5px;
+
+}
+ul{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+}
+.sname{
+	
+}
+.rating{
+	font-weight: bold;
+}
+button{
+	background: #DEBB52;
+	border-width: 10px; 
+
+}
+body{
+	background-color: #DCDCE0;
+	padding-top:10px; 
+}
+.current{
+	background-color: #77DD77;
+}
+.target{
+	background-color: #7777DD;
+}
+</style>
+
+<header>
+	<title>Tv Show IMDB Ratings</title>	
+</header>	
+</head>	
+
+
+<body>
+	<span id="title"> Tv Show IMDB Ratings </span>
+
+	<ul id="tvshows">
+		<li>
+			<span class="sname">Six Feet Under</span>
+			<span class="rating">8.9</span>
+		</li>
+		<li>
+			<span class="sname">Dexter</span>
+			<span class="rating">9.0</span>
+		</li>
+		<li>
+			<span class="sname">Breaking Bad</span>
+			<span class="rating">9.6</span>
+		</li>	
+		<li>
+			<span class="sname">True Detective</span>
+			<span class="rating">9.3</span>
+		</li>	
+		<li>
+			<span class="sname">Sherlock</span>
+			<span class="rating">9.3</span>
+		</li>	
+		<li>
+			<span class="sname">Arrested Development</span>
+			<span class="rating">9.1</span>
+		</li>
+		<li>
+			<span class="sname">The Simpsons</span>
+			<span class="rating">9.0</span>
+		</li>
+		<li>
+			<span class="sname">It's Always Sunny in Philadelphia</span>
+			<span class="rating">8.9</span>
+		</li>
+		<li>
+			<span class="sname">Shameless</span>
+			<span class="rating">8.7</span>
+		</li>
+		<li>
+			<span class="sname">Game of Thrones</span>
+			<span class="rating">9.5</span>
+		</li>
+	</ul>
+</body>	
+<button id="bttn">Rank Them!</button>
+</html>
